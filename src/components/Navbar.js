@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
+import LanguageSelector from './LanguageSelector';
 import './Navbar.css';
 
 const Navbar = () => {
+    const { currentLanguage } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
@@ -63,7 +67,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}
                             onClick={() => scrollToSection('home')}
                         >
-                            Home
+                            {getTranslation(currentLanguage, 'navbar.home')}
                         </button>
                     </li>
                     <li>
@@ -71,7 +75,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'services' ? 'active' : ''}`}
                             onClick={() => scrollToSection('services')}
                         >
-                            Services
+                            {getTranslation(currentLanguage, 'navbar.services')}
                         </button>
                     </li>
                     <li>
@@ -79,7 +83,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'videos' ? 'active' : ''}`}
                             onClick={() => scrollToSection('videos')}
                         >
-                            Videos
+                            {getTranslation(currentLanguage, 'navbar.videos')}
                         </button>
                     </li>
                     <li>
@@ -87,7 +91,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'jobs' ? 'active' : ''}`}
                             onClick={() => scrollToSection('jobs')}
                         >
-                            Jobs
+                            {getTranslation(currentLanguage, 'navbar.jobs')}
                         </button>
                     </li>
                     <li>
@@ -95,7 +99,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}
                             onClick={() => scrollToSection('about')}
                         >
-                            About
+                            {getTranslation(currentLanguage, 'navbar.about')}
                         </button>
                     </li>
                     <li>
@@ -103,7 +107,7 @@ const Navbar = () => {
                             className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}
                             onClick={() => scrollToSection('contact')}
                         >
-                            Contact
+                            {getTranslation(currentLanguage, 'navbar.contact')}
                         </button>
                     </li>
                     <li>
@@ -111,18 +115,21 @@ const Navbar = () => {
                             className="nav-link cta-button"
                             onClick={() => scrollToSection('apply')}
                         >
-                            Apply Now
+                            {getTranslation(currentLanguage, 'navbar.applyNow')}
                         </button>
                     </li>
                 </ul>
                 
-                <div 
-                    className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-                    onClick={toggleMenu}
-                >
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
+                <div className="nav-actions">
+                    <LanguageSelector />
+                    <div 
+                        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+                        onClick={toggleMenu}
+                    >
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                    </div>
                 </div>
             </div>
         </nav>

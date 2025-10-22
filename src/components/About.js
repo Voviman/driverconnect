@@ -1,8 +1,11 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './About.css';
 
 const About = () => {
+    const { currentLanguage } = useLanguage();
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true
@@ -31,18 +34,15 @@ const About = () => {
             <div className="container">
                 <div className="about-content">
                     <div className="about-text">
-                        <h2>About DriverConnect</h2>
+                        <h2>{getTranslation(currentLanguage, 'about.title')}</h2>
                         <p>
-                            For over a decade, DriverConnect has been the bridge between skilled truck drivers 
-                            and leading transportation companies across America. We understand the unique challenges 
-                            of the trucking industry and work tirelessly to create meaningful connections that 
-                            benefit both drivers and employers.
+                            {getTranslation(currentLanguage, 'about.description')}
                         </p>
                         
                         <div className="about-features">
-                            {features.map((feature, index) => (
+                            {getTranslation(currentLanguage, 'about.features').map((feature, index) => (
                                 <div key={index} className="feature">
-                                    <i className={feature.icon}></i>
+                                    <i className={features[index].icon}></i>
                                     <div>
                                         <h4>{feature.title}</h4>
                                         <p>{feature.description}</p>
@@ -55,15 +55,15 @@ const About = () => {
                         <div ref={ref} className="stats-visualization">
                             <div className={`stat-circle ${inView ? 'animate' : ''}`}>
                                 <span className="stat-value">98%</span>
-                                <span className="stat-desc">Success Rate</span>
+                                <span className="stat-desc">{getTranslation(currentLanguage, 'about.stats.successRate')}</span>
                             </div>
                             <div className={`stat-circle ${inView ? 'animate' : ''}`} style={{ animationDelay: '0.2s' }}>
                                 <span className="stat-value">15</span>
-                                <span className="stat-desc">Years Experience</span>
+                                <span className="stat-desc">{getTranslation(currentLanguage, 'about.stats.yearsExperience')}</span>
                             </div>
                             <div className={`stat-circle ${inView ? 'animate' : ''}`} style={{ animationDelay: '0.4s' }}>
                                 <span className="stat-value">24/7</span>
-                                <span className="stat-desc">Support</span>
+                                <span className="stat-desc">{getTranslation(currentLanguage, 'about.stats.support')}</span>
                             </div>
                         </div>
                     </div>

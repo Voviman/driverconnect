@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './Hero.css';
 
 const Hero = () => {
+    const { currentLanguage } = useLanguage();
     const [counters, setCounters] = useState({
         drivers: 0,
         companies: 0,
@@ -53,24 +56,25 @@ const Hero = () => {
         <section id="home" className="hero">
             <div className="hero-container">
                 <div className="hero-content">
-                    <h1 className="hero-title">
-                        Connect with <span className="highlight">Premium</span> Trucking Opportunities
+                    <h1 className="hero-title" dangerouslySetInnerHTML={{
+                        __html: getTranslation(currentLanguage, 'hero.title')
+                    }}>
                     </h1>
                     <p className="hero-subtitle">
-                        Join America's leading truck driver hiring agency. We connect experienced drivers with top-paying positions nationwide.
+                        {getTranslation(currentLanguage, 'hero.subtitle')}
                     </p>
                     <div className="hero-stats">
                         <div className="stat">
                             <span className="stat-number">{counters.drivers.toLocaleString()}+</span>
-                            <span className="stat-label">Drivers Placed</span>
+                            <span className="stat-label">{getTranslation(currentLanguage, 'hero.stats.driversPlaced')}</span>
                         </div>
                         <div className="stat">
                             <span className="stat-number">{counters.companies}+</span>
-                            <span className="stat-label">Partner Companies</span>
+                            <span className="stat-label">{getTranslation(currentLanguage, 'hero.stats.partnerCompanies')}</span>
                         </div>
                         <div className="stat">
                             <span className="stat-number">${counters.salary}K+</span>
-                            <span className="stat-label">Average Salary</span>
+                            <span className="stat-label">{getTranslation(currentLanguage, 'hero.stats.averageSalary')}</span>
                         </div>
                     </div>
                     <div className="hero-buttons">
@@ -78,13 +82,13 @@ const Hero = () => {
                             className="btn btn-primary"
                             onClick={() => scrollToSection('apply')}
                         >
-                            Find Your Next Job
+                            {getTranslation(currentLanguage, 'hero.buttons.findJob')}
                         </button>
                         <button 
                             className="btn btn-secondary"
                             onClick={() => scrollToSection('services')}
                         >
-                            Learn More
+                            {getTranslation(currentLanguage, 'hero.buttons.learnMore')}
                         </button>
                     </div>
                 </div>

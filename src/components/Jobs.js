@@ -1,8 +1,11 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './Jobs.css';
 
 const Jobs = () => {
+    const { currentLanguage } = useLanguage();
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true
@@ -50,8 +53,8 @@ const Jobs = () => {
         <section id="jobs" className="jobs">
             <div className="container">
                 <div className="section-header">
-                    <h2>Featured Opportunities</h2>
-                    <p>High-paying positions available nationwide</p>
+                    <h2>{getTranslation(currentLanguage, 'jobs.title')}</h2>
+                    <p>{getTranslation(currentLanguage, 'jobs.subtitle')}</p>
                 </div>
                 <div ref={ref} className="jobs-grid">
                     {jobs.map((job, index) => (
@@ -84,7 +87,7 @@ const Jobs = () => {
                                 ))}
                             </div>
                             <button className="btn btn-outline" onClick={scrollToApply}>
-                                Apply Now
+                                {getTranslation(currentLanguage, 'jobs.applyButton')}
                             </button>
                         </div>
                     ))}

@@ -1,52 +1,36 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './Services.css';
 
 const Services = () => {
+    const { currentLanguage } = useLanguage();
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true
     });
 
-    const services = [
-        {
-            icon: 'fas fa-search',
-            title: 'Job Matching',
-            description: 'Advanced algorithms match your skills and preferences with the perfect trucking opportunities.'
-        },
-        {
-            icon: 'fas fa-handshake',
-            title: 'Career Guidance',
-            description: 'Expert career counselors help you navigate your trucking career path and maximize earnings.'
-        },
-        {
-            icon: 'fas fa-shield-alt',
-            title: 'Benefits Support',
-            description: 'Assistance with health insurance, retirement planning, and other essential benefits.'
-        },
-        {
-            icon: 'fas fa-graduation-cap',
-            title: 'Training Programs',
-            description: 'Access to CDL training, safety courses, and professional development opportunities.'
-        },
-        {
-            icon: 'fas fa-clock',
-            title: '24/7 Support',
-            description: 'Round-the-clock assistance for drivers on the road and companies needing immediate help.'
-        },
-        {
-            icon: 'fas fa-map-marked-alt',
-            title: 'Route Optimization',
-            description: 'Technology-driven route planning to maximize efficiency and minimize downtime.'
-        }
+    const serviceIcons = [
+        'fas fa-search',
+        'fas fa-handshake',
+        'fas fa-shield-alt',
+        'fas fa-graduation-cap',
+        'fas fa-clock',
+        'fas fa-map-marked-alt'
     ];
+
+    const services = getTranslation(currentLanguage, 'services.items').map((service, index) => ({
+        ...service,
+        icon: serviceIcons[index]
+    }));
 
     return (
         <section id="services" className="services">
             <div className="container">
                 <div className="section-header">
-                    <h2>Our Services</h2>
-                    <p>Comprehensive solutions for drivers and trucking companies</p>
+                    <h2>{getTranslation(currentLanguage, 'services.title')}</h2>
+                    <p>{getTranslation(currentLanguage, 'services.subtitle')}</p>
                 </div>
                 <div ref={ref} className="services-grid">
                     {services.map((service, index) => (

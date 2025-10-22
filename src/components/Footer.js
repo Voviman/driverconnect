@@ -1,7 +1,11 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './Footer.css';
 
 const Footer = () => {
+    const { currentLanguage } = useLanguage();
+    
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -21,7 +25,7 @@ const Footer = () => {
                         <div className="footer-logo">
                             <img src="/img/DRIVER CONNECT LOGO AZUL.png" alt="DriverConnect" />
                         </div>
-                        <p>Connecting America's best drivers with premier trucking opportunities since 2010.</p>
+                        <p>{getTranslation(currentLanguage, 'footer.description')}</p>
                         <div className="social-links">
                             <a href="#" aria-label="Facebook">
                                 <i className="fab fa-facebook"></i>
@@ -39,7 +43,7 @@ const Footer = () => {
                     </div>
                     
                     <div className="footer-section">
-                        <h4>Services</h4>
+                        <h4>{getTranslation(currentLanguage, 'footer.services')}</h4>
                         <ul>
                             <li>
                                 <button onClick={() => scrollToSection('services')}>
@@ -65,7 +69,7 @@ const Footer = () => {
                     </div>
                     
                     <div className="footer-section">
-                        <h4>Job Types</h4>
+                        <h4>{getTranslation(currentLanguage, 'footer.jobTypes')}</h4>
                         <ul>
                             <li>
                                 <button onClick={() => scrollToSection('jobs')}>
@@ -91,7 +95,7 @@ const Footer = () => {
                     </div>
                     
                     <div className="footer-section">
-                        <h4>Company</h4>
+                        <h4>{getTranslation(currentLanguage, 'footer.company')}</h4>
                         <ul>
                             <li>
                                 <button onClick={() => scrollToSection('about')}>
@@ -114,7 +118,7 @@ const Footer = () => {
                 </div>
                 
                 <div className="footer-bottom">
-                    <p>&copy; 2024 DriverConnect. All rights reserved.</p>
+                    <p>{getTranslation(currentLanguage, 'footer.copyright')}</p>
                 </div>
             </div>
         </footer>

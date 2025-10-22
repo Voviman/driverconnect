@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './VideoSection.css';
 
 const VideoSection = () => {
+    const { currentLanguage } = useLanguage();
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true
@@ -12,16 +15,18 @@ const VideoSection = () => {
     const videoPlayerRef = useRef(null);
     const mainVideoRef = useRef(null);
 
+    // Get translated video data
+    const videoData = getTranslation(currentLanguage, 'videoSection.videos');
     const videos = [
         {
             src: '/img/video 1.mp4',
-            title: 'Жизнь водителя дальнобойщика',
-            description: 'Погрузитесь в захватывающий мир дальнобойщиков и их приключений на дорогах lorem1000  ipsum dolor sit amet consectetur adipiscing elit'
+            title: videoData[0]?.title || 'Жизнь водителя дальнобойщика',
+            description: videoData[0]?.description || 'Погрузитесь в захватывающий мир дальнобойщиков и их приключений на дорогах lorem1000  ipsum dolor sit amet consectetur adipiscing elit'
         },
         {
             src: '/img/video 2.mp4',
-            title: 'Карьерные возможности',
-            description: 'Откройте для себя множество возможностей в транспортной индустрии'
+            title: videoData[1]?.title || 'Карьерные возможности',
+            description: videoData[1]?.description || 'Откройте для себя множество возможностей в транспортной индустрии'
         }
     ];
 
@@ -31,8 +36,8 @@ const VideoSection = () => {
         <section id="videos" className="video-section">
             <div className="container">
                 <div className="section-header">
-                    <h2>Наши Видео</h2>
-                    <p>Познакомьтесь с миром профессионального вождения грузовиков</p>
+                    <h2>{getTranslation(currentLanguage, 'videoSection.title')}</h2>
+                    <p>{getTranslation(currentLanguage, 'videoSection.subtitle')}</p>
                 </div>
                 
                 <div ref={ref} className={`video-content ${inView ? 'fade-in visible' : 'fade-in'}`}>
@@ -46,7 +51,7 @@ const VideoSection = () => {
                             preload="metadata"
                         >
                             <source src={videos[activeVideo].src} type="video/mp4" />
-                            Ваш браузер не поддерживает видео тег.
+                            {getTranslation(currentLanguage, 'videoSection.browserNotSupported')}
                         </video>
                         
                         <div className="video-info">

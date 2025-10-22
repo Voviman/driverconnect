@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
+import { sendFormEmail, sendToMultipleRecipients } from '../services/emailService';
 import './Contact.css';
 
 const Contact = () => {
+    const { currentLanguage } = useLanguage();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -90,24 +94,38 @@ const Contact = () => {
         
         setIsSubmitting(true);
         
-        // Simulate form submission
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Send email using basic EmailJS function
+            const result = await sendFormEmail(formData, currentLanguage);
             
-            showNotification("Application submitted successfully! We'll contact you within 24 hours.", 'success');
-            
-            // Reset form
-            setFormData({
-                name: '',
-                email: '',
-                phone: '',
-                experience: '',
-                cdlType: '',
-                message: ''
-            });
-            setErrors({});
+            if (result.success) {
+                console.log('Email sent successfully:', result);
+                showNotification(
+                    getTranslation(currentLanguage, 'contact.form.success') || 
+                    "Application submitted successfully! We'll contact you within 24 hours.", 
+                    'success'
+                );
+                
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    experience: '',
+                    cdlType: '',
+                    message: ''
+                });
+                setErrors({});
+            } else {
+                throw new Error(result.message);
+            }
         } catch (error) {
-            showNotification('There was an error submitting your application. Please try again.', 'error');
+            console.error('Form submission error:', error);
+            showNotification(
+                getTranslation(currentLanguage, 'contact.form.error') || 
+                'There was an error submitting your application. Please try again.', 
+                'error'
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -117,8 +135,8 @@ const Contact = () => {
         <section id="contact" className="contact">
             <div className="container">
                 <div className="section-header">
-                    <h2>Get In Touch</h2>
-                    <p>Ready to start your trucking career journey?</p>
+                    <h2>{getTranslation(currentLanguage, 'contact.title')}</h2>
+                    <p>{getTranslation(currentLanguage, 'contact.subtitle')}</p>
                 </div>
                 <div className="contact-content">
                     <div className="contact-info">
@@ -127,9 +145,9 @@ const Contact = () => {
                                 <i className="fas fa-phone"></i>
                             </div>
                             <div className="contact-details">
-                                <h4>Call Us</h4>
+                                <h4>{getTranslation(currentLanguage, 'contact.info.call')}</h4>
                                 <p>1-800-DRIVERS (1-800-374-8377)</p>
-                                <span>Available 24/7</span>
+                                <span>{getTranslation(currentLanguage, 'contact.info.available')}</span>
                             </div>
                         </div>
                         
@@ -138,9 +156,9 @@ const Contact = () => {
                                 <i className="fas fa-envelope"></i>
                             </div>
                             <div className="contact-details">
-                                <h4>Email Us</h4>
+                                <h4>{getTranslation(currentLanguage, 'contact.info.email')}</h4>
                                 <p>careers@driverconnect.com</p>
-                                <span>Response within 2 hours</span>
+                                <span>{getTranslation(currentLanguage, 'contact.info.response')}</span>
                             </div>
                         </div>
                         
@@ -149,22 +167,22 @@ const Contact = () => {
                                 <i className="fas fa-map-marker-alt"></i>
                             </div>
                             <div className="contact-details">
-                                <h4>Visit Us</h4>
+                                <h4>{getTranslation(currentLanguage, 'contact.info.visit')}</h4>
                                 <p>1280 Powis Rd, West Chicago IL, 60185</p>
-                                <span>Mon-Fri: 8AM-6PM</span>
+                                <span>{getTranslation(currentLanguage, 'contact.info.hours')}</span>
                             </div>
                         </div>
                     </div>
                     
                     <div className="contact-form-container">
                         <form id="apply" className="contact-form" onSubmit={handleSubmit}>
-                            <h3>Quick Application</h3>
+                            <h3>{getTranslation(currentLanguage, 'contact.form.title')}</h3>
                             
                             <div className="form-group">
                                 <input
                                     type="text"
                                     name="name"
-                                    placeholder="Full Name"
+                                    placeholder={getTranslation(currentLanguage, 'contact.form.name')}
                                     value={formData.name}
                                     onChange={handleInputChange}
                                     className={errors.name ? 'error' : ''}
@@ -177,7 +195,7 @@ const Contact = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="Email Address"
+                                    placeholder={getTranslation(currentLanguage, 'contact.form.email')}
                                     value={formData.email}
                                     onChange={handleInputChange}
                                     className={errors.email ? 'error' : ''}
@@ -190,7 +208,7 @@ const Contact = () => {
                                 <input
                                     type="tel"
                                     name="phone"
-                                    placeholder="Phone Number"
+                                    placeholder={getTranslation(currentLanguage, 'contact.form.phone')}
                                     value={formData.phone}
                                     onChange={handleInputChange}
                                     className={errors.phone ? 'error' : ''}
@@ -236,7 +254,7 @@ const Contact = () => {
                             <div className="form-group">
                                 <textarea
                                     name="message"
-                                    placeholder="Tell us about your career goals and preferences"
+                                    placeholder={getTranslation(currentLanguage, 'contact.form.message')}
                                     rows="4"
                                     value={formData.message}
                                     onChange={handleInputChange}
@@ -250,10 +268,10 @@ const Contact = () => {
                             >
                                 {isSubmitting ? (
                                     <>
-                                        <i className="fas fa-spinner fa-spin"></i> Processing...
+                                        <i className="fas fa-spinner fa-spin"></i> {getTranslation(currentLanguage, 'contact.form.processing')}
                                     </>
                                 ) : (
-                                    'Submit Application'
+                                    getTranslation(currentLanguage, 'contact.form.submit')
                                 )}
                             </button>
                         </form>

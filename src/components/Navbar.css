@@ -98,6 +98,12 @@
     display: none !important;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -131,6 +137,10 @@
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-actions {
+        gap: 0.5rem;
     }
 
     .hamburger {

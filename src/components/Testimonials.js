@@ -1,8 +1,11 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getTranslation } from '../translations/translations';
 import './Testimonials.css';
 
 const Testimonials = () => {
+    const { currentLanguage } = useLanguage();
     const { ref, inView } = useInView({
         threshold: 0.1,
         triggerOnce: true
@@ -30,8 +33,8 @@ const Testimonials = () => {
         <section className="testimonials">
             <div className="container">
                 <div className="section-header">
-                    <h2>What Drivers Say</h2>
-                    <p>Real experiences from our driver community</p>
+                    <h2>{getTranslation(currentLanguage, 'testimonials.title')}</h2>
+                    <p>{getTranslation(currentLanguage, 'testimonials.subtitle')}</p>
                 </div>
                 <div ref={ref} className="testimonials-grid">
                     {testimonials.map((testimonial, index) => (
