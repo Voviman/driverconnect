@@ -13,28 +13,28 @@ const Jobs = () => {
 
     const jobs = [
         {
-            title: 'Long Haul OTR Driver',
-            salary: '$65K - $85K/year',
+            title: 'Trainee Truck Driver',
+            salary: '$75K - $85K/year',
             location: 'Nationwide Routes',
             type: 'Class A CDL Required',
-            experience: '2+ Years Experience',
-            benefits: ['Health Insurance', '401K Match', 'Paid Time Off']
+            experience: '0 Years Experience',
+            benefits: ['Paid trainee Program', '401K Match', 'Free Transportation']
         },
         {
-            title: 'Regional Delivery Driver',
-            salary: '$55K - $70K/year',
-            location: 'Midwest Region',
+            title: 'Leare Operator position',
+            salary: '$80K - $95K/year',
+            location: 'Nationwide Routes',
             type: 'Class A CDL Required',
             experience: '1+ Years Experience',
-            benefits: ['Home Weekly', 'Performance Bonus', 'Equipment Provided']
+            benefits: ['Lease to Purchase program', 'Performance Bonus', 'Equipment Provided']
         },
         {
-            title: 'Local CDL Driver',
-            salary: '$50K - $65K/year',
-            location: 'Major Cities',
-            type: 'Class B CDL Accepted',
-            experience: 'Entry Level Welcome',
-            benefits: ['Home Daily', 'Training Provided', 'Union Benefits']
+            title: 'Owner Operator',
+            salary: '$100K - $120K/year',
+            location: 'Nationwide Routes',
+            type: 'Class A CDL Required',
+            experience: '1+ Years Experience',
+            benefits: ['High Pay', 'Weekly Settlements', 'Union Benefits']
         }
     ];
 

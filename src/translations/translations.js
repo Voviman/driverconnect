@@ -145,7 +145,7 @@ export const translations = {
                 },
                 {
                     title: "Benefits Support",
-                    description: "Assistance with health insurance, retirement planning, and other essential benefits."
+                    description: "Exclusive driver solutions like automatic route planning with the cheapest fuel stops and optimized trip mapping to boost your earnings."
                 },
                 {
                     title: "Training Programs",
@@ -226,7 +226,7 @@ export const translations = {
                 },
                 {
                     title: "Soporte de Beneficios",
-                    description: "Asistencia con seguro médico, planificación de jubilación y otros beneficios esenciales."
+                    description: "Soluciones exclusivas para conductores, como la planificación automática de rutas con las paradas de combustible más económicas y la optimización del recorrido para aumentar tus ganancias."
                 },
                 {
                     title: "Programas de Entrenamiento",

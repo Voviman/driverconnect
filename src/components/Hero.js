@@ -13,7 +13,7 @@ const Hero = () => {
 
     useEffect(() => {
         const animateCounters = () => {
-            const targets = { drivers: 5000, companies: 500, salary: 75 };
+            const targets = { drivers: 700, companies: 10, salary: 75 };
             const duration = 2000; // 2 seconds
             const steps = 60;
             const stepDuration = duration / steps;

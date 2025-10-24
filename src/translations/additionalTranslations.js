@@ -135,11 +135,11 @@ export const additionalTranslationsEn = {
     },
     // Footer section
     footer: {
-        description: "Connecting America's best drivers with premier trucking opportunities since 2010.",
+        description: "Connecting America's best drivers with premier trucking opportunities since 2024.",
         services: "Services",
         jobTypes: "Job Types",
         company: "Company", 
-        copyright: "© 2024 DriverConnect. All rights reserved."
+        copyright: "© 2025 DriverConnect. All rights reserved."
     }
 };
 
@@ -207,10 +207,10 @@ export const additionalTranslationsEs = {
     },
     // Footer section
     footer: {
-        description: "Conectando a los mejores conductores de América con oportunidades premium de transporte desde 2010.",
+        description: "Conectando a los mejores conductores de América con oportunidades premium de transporte desde 2024.",
         services: "Servicios",
         jobTypes: "Tipos de Trabajo",
         company: "Empresa",
-        copyright: "© 2024 DriverConnect. Todos los derechos reservados."
+        copyright: "© 2025 DriverConnect. Todos los derechos reservados."
     }
 };
