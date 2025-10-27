@@ -2,9 +2,9 @@ import emailjs from '@emailjs/browser';
 
 // EmailJS configuration
 const EMAILJS_CONFIG = {
-    SERVICE_ID: process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_lebubvi', // Замените на ваш Service ID из EmailJS
-    TEMPLATE_ID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_l2jcwnb', // Замените на ваш Template ID из EmailJS
-    PUBLIC_KEY: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'yUbQP4K87uPcCM6d4' // Замените на ваш Public Key из EmailJS
+    SERVICE_ID: process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_lebubvi', // Replace with your Service ID from EmailJS
+    TEMPLATE_ID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_l2jcwnb', // Replace with your Template ID from EmailJS
+    PUBLIC_KEY: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'yUbQP4K87uPcCM6d4' // Replace with your Public Key from EmailJS
 };
 
 // Email recipients configuration
@@ -21,7 +21,7 @@ emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
  * @param {string} currentLanguage - Current language for email template
  * @returns {Promise} - EmailJS send promise
  */
-export const sendFormEmail = async (formData, currentLanguage = 'ru') => {
+export const sendFormEmail = async (formData, currentLanguage = 'en') => {
     try {
         // Validate EmailJS configuration
         if (!EMAILJS_CONFIG.SERVICE_ID || !EMAILJS_CONFIG.TEMPLATE_ID || !EMAILJS_CONFIG.PUBLIC_KEY) {
@@ -36,11 +36,11 @@ export const sendFormEmail = async (formData, currentLanguage = 'ru') => {
             phone: formData.phone,
             experience: formData.experience,
             cdl_type: formData.cdlType,
-            message: formData.message || 'Нет дополнительного сообщения',
+            message: formData.message || 'No additional message',
             
             // Additional info
             language: currentLanguage,
-            submission_date: new Date().toLocaleString('ru-RU', {
+            submission_date: new Date().toLocaleString('en-US', {
                 year: 'numeric',
                 month: 'long', 
                 day: 'numeric',
@@ -55,7 +55,7 @@ export const sendFormEmail = async (formData, currentLanguage = 'ru') => {
             experience_text: formatExperience(formData.experience, currentLanguage),
             cdl_type_text: formatCDLType(formData.cdlType, currentLanguage),
             
-            // Recipients for template (используется в шаблоне EmailJS)
+            // Recipients for template (used in EmailJS template)
             to_name: 'DriverConnect Team',
             reply_to: formData.email
         };
@@ -91,11 +91,10 @@ export const sendFormEmail = async (formData, currentLanguage = 'ru') => {
  */
 const getEmailSubject = (language) => {
     const subjects = {
-        ru: 'Новая заявка на работу - DriverConnect',
         en: 'New Job Application - DriverConnect',
         es: 'Nueva Solicitud de Empleo - DriverConnect'
     };
-    return subjects[language] || subjects.ru;
+    return subjects[language] || subjects.en;
 };
 
 /**
@@ -103,12 +102,6 @@ const getEmailSubject = (language) => {
  */
 const formatExperience = (experience, language) => {
     const experienceLabels = {
-        ru: {
-            '0-1': '0-1 лет',
-            '2-5': '2-5 лет',
-            '6-10': '6-10 лет',
-            '10+': '10+ лет'
-        },
         en: {
             '0-1': '0-1 Years',
             '2-5': '2-5 Years',
@@ -130,12 +123,6 @@ const formatExperience = (experience, language) => {
  */
 const formatCDLType = (cdlType, language) => {
     const cdlLabels = {
-        ru: {
-            'class-a': 'Класс A',
-            'class-b': 'Класс B',
-            'class-c': 'Класс C',
-            'none': 'Нет CDL (Нужно обучение)'
-        },
         en: {
             'class-a': 'Class A',
             'class-b': 'Class B',
@@ -155,14 +142,14 @@ const formatCDLType = (cdlType, language) => {
 /**
  * Send email to multiple recipients by calling EmailJS multiple times
  */
-export const sendToMultipleRecipients = async (formData, currentLanguage = 'ru') => {
+export const sendToMultipleRecipients = async (formData, currentLanguage = 'en') => {
     try {
         const results = [];
         
-        // Отправляем на каждый email отдельно
+        // Send to each email separately
         for (const email of EMAIL_RECIPIENTS) {
             try {
-                // Создаем отдельные параметры для каждого получателя
+                // Create separate parameters for each recipient
                 const templateParams = {
                     from_name: formData.name,
                     from_email: formData.email,
@@ -177,7 +164,7 @@ export const sendToMultipleRecipients = async (formData, currentLanguage = 'ru')
                     cdl_type_text: formatCDLType(formData.cdlType, currentLanguage),
                     to_name: 'DriverConnect Team',
                     reply_to: formData.email,
-                    recipient_email: email // Конкретный получатель
+                    recipient_email: email // Specific recipient
                 };
 
                 const response = await emailjs.send(

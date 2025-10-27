@@ -20,13 +20,13 @@ const VideoSection = () => {
     const videos = [
         {
             src: '/img/video 1.mp4',
-            title: videoData[0]?.title || 'Жизнь водителя дальнобойщика',
-            description: videoData[0]?.description || 'Погрузитесь в захватывающий мир дальнобойщиков и их приключений на дорогах lorem1000  ipsum dolor sit amet consectetur adipiscing elit'
+            title: videoData[0]?.title || 'Life of a Long-Haul Driver',
+            description: videoData[0]?.description || 'Dive into the exciting world of truckers and their adventures on the roads lorem1000 ipsum dolor sit amet consectetur adipiscing elit'
         },
         {
             src: '/img/video 2.mp4',
-            title: videoData[1]?.title || 'Карьерные возможности',
-            description: videoData[1]?.description || 'Откройте для себя множество возможностей в транспортной индустрии'
+            title: videoData[1]?.title || 'Career Opportunities',
+            description: videoData[1]?.description || 'Discover numerous opportunities in the transportation industry'
         }
     ];
 

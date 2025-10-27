@@ -146,7 +146,7 @@ const Contact = () => {
                             </div>
                             <div className="contact-details">
                                 <h4>{getTranslation(currentLanguage, 'contact.info.call')}</h4>
-                                <p>1-800-DRIVERS (1-800-374-8377)</p>
+                                <p>1-513-202-3039</p>
                                 <span>{getTranslation(currentLanguage, 'contact.info.available')}</span>
                             </div>
                         </div>
@@ -157,7 +157,7 @@ const Contact = () => {
                             </div>
                             <div className="contact-details">
                                 <h4>{getTranslation(currentLanguage, 'contact.info.email')}</h4>
-                                <p>careers@driverconnect.com</p>
+                                <p>hr@driverconnect.us</p>
                                 <span>{getTranslation(currentLanguage, 'contact.info.response')}</span>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ const Jobs = () => {
             benefits: ['Paid trainee Program', '401K Match', 'Free Transportation']
         },
         {
-            title: 'Leare Operator position',
+            title: 'Lease Operator position',
             salary: '$80K - $95K/year',
             location: 'Nationwide Routes',
             type: 'Class A CDL Required',

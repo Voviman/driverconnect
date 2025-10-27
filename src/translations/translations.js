@@ -1,87 +1,6 @@
-import { additionalTranslationsRu, additionalTranslationsEn, additionalTranslationsEs } from './additionalTranslations';
+import { additionalTranslationsEn, additionalTranslationsEs } from './additionalTranslations';
 
 export const translations = {
-    ru: {
-        // VideoSection translations
-        videoSection: {
-            title: "Наши Видео",
-            subtitle: "Познакомьтесь с миром профессионального вождения грузовиков",
-            videos: [
-                {
-                    title: "Жизнь водителя дальнобойщика",
-                    description: "Погрузитесь в захватывающий мир дальнобойщиков и их приключений на дорогах lorem1000 ipsum dolor sit amet consectetur adipiscing elit"
-                },
-                {
-                    title: "Карьерные возможности",
-                    description: "Откройте для себя множество возможностей в транспортной индустрии"
-                }
-            ],
-            browserNotSupported: "Ваш браузер не поддерживает видео тег."
-        },
-        // Language selector
-        language: {
-            select: "Выберите язык",
-            russian: "Русский",
-            english: "English",
-            spanish: "Español"
-        },
-        // Navbar translations
-        navbar: {
-            home: "Главная",
-            services: "Услуги",
-            videos: "Видео",
-            jobs: "Вакансии",
-            about: "О нас",
-            contact: "Контакты",
-            applyNow: "Подать заявку"
-        },
-        // Hero section
-        hero: {
-            title: "Подключитесь к <span class='highlight'>Премиальным</span> Возможностям в Грузоперевозках",
-            subtitle: "Присоединяйтесь к ведущему агентству по найму водителей грузовиков в Америке. Мы соединяем опытных водителей с высокооплачиваемыми позициями по всей стране.",
-            stats: {
-                driversPlaced: "Трудоустроенных Водителей",
-                partnerCompanies: "Компаний-Партнеров",
-                averageSalary: "Средняя Зарплата"
-            },
-            buttons: {
-                findJob: "Найти Работу",
-                learnMore: "Узнать Больше"
-            }
-        },
-        // Services section
-        services: {
-            title: "Наши Услуги",
-            subtitle: "Комплексные решения для водителей и транспортных компаний",
-            items: [
-                {
-                    title: "Подбор Работы",
-                    description: "Передовые алгоритмы подбирают ваши навыки и предпочтения с идеальными возможностями в грузоперевозках."
-                },
-                {
-                    title: "Карьерное Консультирование",
-                    description: "Опытные карьерные консультанты помогают вам построить карьерный путь в грузоперевозках и максимизировать заработок."
-                },
-                {
-                    title: "Поддержка Льгот",
-                    description: "Помощь с медицинским страхованием, пенсионным планированием и другими важными льготами."
-                },
-                {
-                    title: "Программы Обучения",
-                    description: "Доступ к обучению CDL, курсам безопасности и возможностям профессионального развития."
-                },
-                {
-                    title: "Поддержка 24/7",
-                    description: "Круглосуточная помощь для водителей в дороге и компаний, нуждающихся в немедленной помощи."
-                },
-                {
-                    title: "Оптимизация Маршрутов",
-                    description: "Технологическое планирование маршрутов для максимизации эффективности и минимизации простоев."
-                }
-            ]
-        },
-        ...additionalTranslationsRu
-    },
     en: {
         // VideoSection translations
         videoSection: {
@@ -102,7 +21,6 @@ export const translations = {
         // Language selector
         language: {
             select: "Select Language",
-            russian: "Русский",
             english: "English",
             spanish: "Español"
         },
@@ -183,7 +101,6 @@ export const translations = {
         // Language selector
         language: {
             select: "Seleccionar Idioma",
-            russian: "Русский",
             english: "English",
             spanish: "Español"
         },
@@ -254,8 +171,8 @@ export const getTranslation = (language, path) => {
         if (result && result[key]) {
             result = result[key];
         } else {
-            // Fallback to Russian if translation not found
-            result = translations.ru;
+            // Fallback to English if translation not found
+            result = translations.en;
             for (const fallbackKey of keys) {
                 if (result && result[fallbackKey]) {
                     result = result[fallbackKey];

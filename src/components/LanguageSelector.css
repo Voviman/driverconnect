@@ -39,13 +39,6 @@
     background-repeat: no-repeat;
 }
 
-/* Russian flag */
-.flag-ru {
-    background: linear-gradient(to bottom, 
-        #ffffff 0%, #ffffff 33.33%, 
-        #0052cc 33.33%, #0052cc 66.66%, 
-        #cc0000 66.66%, #cc0000 100%);
-}
 
 /* US flag (for English) - simplified */
 .flag-us {

@@ -12,8 +12,8 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
     const [currentLanguage, setCurrentLanguage] = useState(() => {
-        // Get saved language from localStorage or default to Russian
-        return localStorage.getItem('selectedLanguage') || 'ru';
+        // Get saved language from localStorage or default to English
+        return localStorage.getItem('selectedLanguage') || 'en';
     });
 
     const changeLanguage = (languageCode) => {
@@ -29,7 +29,6 @@ export const LanguageProvider = ({ children }) => {
     const value = {
         currentLanguage,
         changeLanguage,
-        isRussian: currentLanguage === 'ru',
         isEnglish: currentLanguage === 'en',
         isSpanish: currentLanguage === 'es'
     };
