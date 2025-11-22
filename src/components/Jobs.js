@@ -29,6 +29,14 @@ const Jobs = () => {
             benefits: ['Lease to Purchase program', 'Performance Bonus', 'Equipment Provided']
         },
         {
+            title: 'Company Driver',
+            salary: '$80K - $95K/year',
+            location: 'Nationwide Routes',
+            type: 'Class A CDL Required',
+            experience: '1+ Years Experience',
+            benefits: ['25%-30% from gross', 'Transportation benefits', 'Union Benefits']
+        },
+        {
             title: 'Owner Operator',
             salary: '$100K - $120K/year',
             location: 'Nationwide Routes',

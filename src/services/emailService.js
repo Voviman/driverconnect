@@ -1,4 +1,6 @@
 import emailjs from '@emailjs/browser';
+import { sendToTelegram } from './telegramService';
+import { addToGoogleSheets } from './googleSheetsService';
 
 // EmailJS configuration
 const EMAILJS_CONFIG = {
@@ -137,6 +139,81 @@ const formatCDLType = (cdlType, language) => {
         }
     };
     return cdlLabels[language]?.[cdlType] || cdlType;
+};
+
+/**
+ * Send form data to all services: Email, Telegram, and Google Sheets
+ * @param {Object} formData - Form data to send
+ * @param {string} currentLanguage - Current language for formatting
+ * @returns {Promise} - Combined results from all services
+ */
+export const sendToAllServices = async (formData, currentLanguage = 'en') => {
+    const results = {
+        email: { success: false },
+        telegram: { success: false },
+        googleSheets: { success: false }
+    };
+
+    try {
+        // Send to all services in parallel for better performance
+        const [emailResult, telegramResult, googleSheetsResult] = await Promise.allSettled([
+            sendFormEmail(formData, currentLanguage),
+            sendToTelegram(formData, currentLanguage),
+            addToGoogleSheets(formData, currentLanguage)
+        ]);
+
+        // Process email result
+        if (emailResult.status === 'fulfilled') {
+            results.email = emailResult.value;
+        } else {
+            results.email = {
+                success: false,
+                error: emailResult.reason?.message || 'Email sending failed'
+            };
+        }
+
+        // Process Telegram result
+        if (telegramResult.status === 'fulfilled') {
+            results.telegram = telegramResult.value;
+        } else {
+            results.telegram = {
+                success: false,
+                error: telegramResult.reason?.message || 'Telegram sending failed'
+            };
+        }
+
+        // Process Google Sheets result
+        if (googleSheetsResult.status === 'fulfilled') {
+            results.googleSheets = googleSheetsResult.value;
+        } else {
+            results.googleSheets = {
+                success: false,
+                error: googleSheetsResult.reason?.message || 'Google Sheets operation failed'
+            };
+        }
+
+        // Determine overall success
+        const successCount = Object.values(results).filter(r => r.success).length;
+        const totalServices = Object.keys(results).length;
+
+        return {
+            success: successCount > 0, // Success if at least one service worked
+            results,
+            successCount,
+            totalServices,
+            message: `Successfully sent to ${successCount}/${totalServices} services`,
+            partialSuccess: successCount > 0 && successCount < totalServices
+        };
+
+    } catch (error) {
+        console.error('Error in sendToAllServices:', error);
+        return {
+            success: false,
+            results,
+            error: error.message,
+            message: 'Failed to send to any service'
+        };
+    }
 };
 
 /**

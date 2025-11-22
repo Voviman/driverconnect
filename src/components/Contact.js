@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getTranslation } from '../translations/translations';
-import { sendFormEmail, sendToMultipleRecipients } from '../services/emailService';
+import { sendFormEmail, sendToMultipleRecipients, sendToAllServices } from '../services/emailService';
 import './Contact.css';
 
 const Contact = () => {
@@ -95,16 +95,21 @@ const Contact = () => {
         setIsSubmitting(true);
         
         try {
-            // Send email using basic EmailJS function
-            const result = await sendFormEmail(formData, currentLanguage);
+            // Send to all services: Email, Telegram, and Google Sheets
+            const result = await sendToAllServices(formData, currentLanguage);
             
             if (result.success) {
-                console.log('Email sent successfully:', result);
-                showNotification(
-                    getTranslation(currentLanguage, 'contact.form.success') || 
-                    "Application submitted successfully! We'll contact you within 24 hours.", 
-                    'success'
-                );
+                console.log('Form submitted successfully:', result);
+                
+                // Show success message with details
+                let successMessage = getTranslation(currentLanguage, 'contact.form.success') || 
+                    "Application submitted successfully! We'll contact you within 24 hours.";
+                
+                if (result.partialSuccess) {
+                    successMessage += ` (${result.successCount}/${result.totalServices} services successful)`;
+                }
+                
+                showNotification(successMessage, 'success');
                 
                 // Reset form
                 setFormData({
@@ -117,7 +122,7 @@ const Contact = () => {
                 });
                 setErrors({});
             } else {
-                throw new Error(result.message);
+                throw new Error(result.message || 'Failed to submit application');
             }
         } catch (error) {
             console.error('Form submission error:', error);

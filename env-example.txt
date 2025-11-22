@@ -1,0 +1,17 @@
+# Скопируйте этот файл как .env в корень проекта и заполните реальными значениями
+
+# EmailJS Configuration (уже настроено)
+REACT_APP_EMAILJS_SERVICE_ID=service_lebubvi
+REACT_APP_EMAILJS_TEMPLATE_ID=template_l2jcwnb
+REACT_APP_EMAILJS_PUBLIC_KEY=yUbQP4K87uPcCM6d4
+
+# Email Recipients
+REACT_APP_EMAIL_RECIPIENTS=jose@Driverconnect.com,sam@cdl4hire.com
+
+# Telegram Bot Configuration (ТРЕБУЕТ НАСТРОЙКИ)
+REACT_APP_TELEGRAM_BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+REACT_APP_TELEGRAM_CHAT_ID=-1001234567890
+
+# Google Sheets Configuration (ТРЕБУЕТ НАСТРОЙКИ)  
+REACT_APP_GOOGLE_SHEETS_API_KEY=AIzaSyABC123def456GHI789jkl
+
