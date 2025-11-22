@@ -1,0 +1,32 @@
+{
+  "short_name": "DriverConnect",
+  "name": "DriverConnect - Truck Driver Hiring Agency",
+  "description": "Premier truck driver hiring agency connecting skilled CDL drivers with top-paying positions nationwide",
+  "icons": [
+    {
+      "src": "img/ISOTIPO AZUL D CONNECT.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/DRIVER CONNECT LOGO AZUL.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["business", "employment", "transportation"],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
+

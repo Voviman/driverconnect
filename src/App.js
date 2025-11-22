@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
+import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './contexts/LanguageContext';
+import SEO from './components/SEO';
+import StructuredData from './components/StructuredData';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -13,19 +16,23 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <LanguageProvider>
-      <div className="App">
-        <Navbar />
-        <Hero />
-        <Services />
-        <VideoSection />
-        <Jobs />
-        <Testimonials />
-        <About />
-        <Contact />
-        <Footer />
-      </div>
-    </LanguageProvider>
+    <HelmetProvider>
+      <LanguageProvider>
+        <SEO />
+        <StructuredData />
+        <div className="App">
+          <Navbar />
+          <Hero />
+          <Services />
+          <VideoSection />
+          <Jobs />
+          <Testimonials />
+          <About />
+          <Contact />
+          <Footer />
+        </div>
+      </LanguageProvider>
+    </HelmetProvider>
   );
 }
 
